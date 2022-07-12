@@ -26,6 +26,7 @@ def call() {
                     echo "${root}"
                 } else {
                     env.root = tool name: goversion, type: 'go'
+                    echo "${env.root}"
                 }
             }
         }
