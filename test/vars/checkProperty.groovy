@@ -1,6 +1,6 @@
 def call() {
     script{
-        withEnv(["GOPATH=${env.root}"]) {
+        withEnv(["GOPATH=${root}"]) {
             sh '''#!/bin/bash
                 echo "GOPATH = $GOPATH"
             '''
