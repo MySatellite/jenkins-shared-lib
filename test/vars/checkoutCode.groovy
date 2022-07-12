@@ -30,5 +30,5 @@ def call() {
             }
         }
     }
-    return this
+    return "${root}"
 }
