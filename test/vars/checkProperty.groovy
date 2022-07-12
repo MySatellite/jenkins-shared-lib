@@ -4,5 +4,6 @@ def call() {
             sh '''#!/bin/bash
                 echo "GOPATH = ${root}
             '''
+        }
     }
 }
