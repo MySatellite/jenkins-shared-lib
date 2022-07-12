@@ -12,7 +12,7 @@ def call() {
             }
         } else {
             catchError() {
-                checkout([$class: 'GitSCM', branches: [[name: '$tag']], extensions: [[$class: 'WipeWorkspace'], [$class: 'GitTagMessageExtension']], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'gitlab-kumparan-ssh-key', url: 'git@gitlab.kumparan.com:yowez/$serviceName.git']]])
+                checkout([$class: 'GitSCM', branches: [[name: '$tag']], extensions: [[$class: 'WipeWorkspace'], [$class: 'GitTagMessageExtension']], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'kumparan-gitlab', url: 'git@gitlab.kumparan.com:yowez/$serviceName.git']]])
                 goversion = sh( script: "if [ -f goversion ]; then cat goversion | head -n 1 | tr -d '\n' ; else echo -n 'not found'; fi", returnStdout: true )
                 echo goversion
                 if (goversion == "not found") {
