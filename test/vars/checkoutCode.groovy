@@ -1,4 +1,4 @@
-def call(env) {
+def call() {
     cleanWs()
     script {
         if (params.serviceName.contains('helper-service')) {
