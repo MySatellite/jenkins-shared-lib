@@ -1,4 +1,4 @@
-def call() {
+def call(env) {
     cleanWs()
     script {
         if (params.serviceName.contains('helper-service')) {
@@ -22,13 +22,13 @@ def call() {
                 godir = sh( script: "(test -d /home/ubuntu/jenkins/tools/org.jenkinsci.plugins.golang.GolangInstallation/${goversion} && echo '1' || echo '0') |tr -d '\n'", returnStdout: true )
                 echo "${godir}"
                 if (godir == '1'){
-                    root = "/home/ubuntu/jenkins/tools/org.jenkinsci.plugins.golang.GolangInstallation/${goversion}"
+                    env.root = "/home/ubuntu/jenkins/tools/org.jenkinsci.plugins.golang.GolangInstallation/${goversion}"
                     echo "${root}"
                 } else {
-                    root = tool name: goversion, type: 'go'
+                    env.root = tool name: goversion, type: 'go'
                 }
             }
         }
     }
-    return "${root}"
+    return "${env.root}"
 }
