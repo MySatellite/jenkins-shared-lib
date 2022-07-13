@@ -34,4 +34,32 @@ def call(Map opts = [:]) {
         template = renderTemplate(template, template_vars)
         templates.add(template)
     }
+
+    if (nodeSelector) {
+	def selector = """
+spec:
+  nodeSelector:
+    ${nodeSelector}
+"""
+        templates.add(selector)
+    }
+
+    if (jnlpImage) {
+	def baseImage = """
+spec:
+  containers:
+  - name: jnlp
+    image: ${jnlpImage}
+"""
+        templates.add(baseImage)
+    }
+
+    def yamlFile = new yamlMerger()
+    def final_template = yamlFile.merge(templates)
+    
+    ref['cloud'] = cloud
+    ref['label'] = label
+    ref['yaml'] = final_template
+
+    return ref
 }
