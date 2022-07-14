@@ -1,7 +1,7 @@
 import com.shared.agent.yamlMerger
 
 def call(Map opts = [:]) {
-    String name = opts.get('name', 'base')
+    String name = opts.get('name', 'jenkins-slave')
     String defaultLabel = "${name.replace("+", "_")}-${UUID.randomUUID().toString()}"
     String label = opts.get('label', defaultLabel)
     String cloud = opts.get('cloud', 'kubernetes')
