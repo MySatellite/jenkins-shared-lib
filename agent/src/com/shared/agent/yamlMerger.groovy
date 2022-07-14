@@ -21,7 +21,7 @@ class yamlMerger {
 	return parser.dump(mergedResult)
     }
 
-    private static Object addToMergeResult(Map<String, Object> mergedResult, String key, Object yamlValue) {
+    private static Object addToMergedResult(Map<String, Object> mergedResult, String key, Object yamlValue) {
         return mergedResult.put(key, yamlValue)
     }
 
