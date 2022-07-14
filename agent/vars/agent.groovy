@@ -16,13 +16,14 @@ def call(Map opts = [:]) {
 
     def comps = container.split('\\,').toList()
 
-    if (container == '') {
+    if (!container.contains("jenkins")) {
         comps = comps.plus(0, 'jenkins')
+        lists = comps.findAll()
     }
 
     def templates = []
     String template
-    for (c in comps) {
+    for (c in lists) {
         template = libraryResource 'templates/' + c + '.yaml'
         template = render(template, template_vars)
         templates.add(template)
