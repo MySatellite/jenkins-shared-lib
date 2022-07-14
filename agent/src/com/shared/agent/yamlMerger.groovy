@@ -8,7 +8,7 @@ import org.yaml.snakeyaml.constructor.SafeConstructor
 class yamlMerger {
     private final Yaml parser
 
-    yamlGenerator() {
+    yamlMerger() {
         parser = new Yaml(new SafeConstructor())
     }
 
