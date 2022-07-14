@@ -23,8 +23,8 @@ def call(Map opts = [:]) {
 
     def comps = name.split('\\+|-').toList()
 
-    if (name != 'jenkins-slave') {
-        comps = comps.plus(0, 'jenkins-slave')
+    if (name != 'base') {
+        comps = comps.plus(0, 'base')
     }
 
     def templates = []
