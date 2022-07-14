@@ -2,6 +2,7 @@ import com.shared.agent.yamlMerger
 
 def call(Map opts = [:]) {
     String name = opts.get('name', 'base')
+    String container = opts.get('container', 'jenkins, docker').replace(" ", "").toString()
     String defaultLabel = "${name.replace("+", "_")}-${UUID.randomUUID().toString()}"
     String label = opts.get('label', defaultLabel)
     String cloud = opts.get('cloud', 'kubernetes')
@@ -21,7 +22,7 @@ def call(Map opts = [:]) {
 
     def ref = [:]
 
-    def comps = name.split('\\+|-').toList()
+    def comps = container.split('\\,').toList()
 
     /*if (name != 'base') {
         comps = comps.plus(0, 'base')
