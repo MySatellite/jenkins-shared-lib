@@ -3,8 +3,8 @@ import com.shared.agent.yamlMerger
 def call(Map opts = [:]) {
     String name = opts.get('name', 'base')
     String container = opts.get('container', '').replace(" ", "").toString()
-    String defaultLabel = "${name.replace("+", "_")}-${UUID.randomUUID().toString()}"
-    String label = opts.get('label', defaultLabel)
+    //String defaultLabel = "${name}-${UUID.randomUUID().toString()}"
+    String label = opts.get('label', name)
     String cloud = opts.get('cloud', 'kubernetes')
     String nodeSelector = opts.get('selector', '')
     String jnlpImage = opts.get('jnlpImage', '')
@@ -23,8 +23,8 @@ def call(Map opts = [:]) {
 
     def templates = []
     String template
-    for (c in lists) {
-        template = libraryResource 'templates/' + c + '.yaml'
+    for (i in lists) {
+        template = libraryResource 'templates/' + i + '.yaml'
         template = render(template, template_vars)
         templates.add(template)
     }
