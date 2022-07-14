@@ -1,4 +1,4 @@
-import com.shared.agent
+import com.shared.agent.yamlMerger
 
 def call(Map opts = [:]) {
     String name = opts.get('name', 'base')
