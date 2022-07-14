@@ -19,7 +19,7 @@ def call(Map opts = [:]) {
     Map template_vars = [:]
     //template_vars['TEMPLATE_DOXYGEN_IMAGE'] = doxygegn_image
 
-    def ret = [:]
+    def ref = [:]
 
     def comps = name.split('\\+|-').toList()
 
