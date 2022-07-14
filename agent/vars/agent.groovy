@@ -23,9 +23,9 @@ def call(Map opts = [:]) {
 
     def comps = name.split('\\+|-').toList()
 
-    if (name != 'base') {
+    /*if (name != 'base') {
         comps = comps.plus(0, 'base')
-    }
+    }*/
 
     def templates = []
     String template
