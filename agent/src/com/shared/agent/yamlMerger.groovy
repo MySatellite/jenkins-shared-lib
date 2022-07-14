@@ -12,7 +12,7 @@ class yamlMerger {
         parser = new Yaml(new SafeConstructor())
     }
 
-    String merge(List<STring> yamls) {
+    String merge(List<String> yamls) {
         Map<String, Object> mergedResult = new LinkedHashMap<String, Object>();
 	for (yaml in yamls) {
             final Map<String, Object> yamlToMerge = parser.load(yaml)
