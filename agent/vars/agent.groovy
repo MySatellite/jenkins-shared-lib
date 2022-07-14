@@ -9,24 +9,15 @@ def call(Map opts = [:]) {
     String nodeSelector = opts.get('selector', '')
     String jnlpImage = opts.get('jnlpImage', '')
 
-    /*String doxygen_image
-
-    try {
-        doxygen_image = "${TEMPLATE_DOXYGEN_IMAGE}"
-    } catch (e) {
-        doxygen_image = "hrektts/doxygen:latest"    
-    }*/
-
     Map template_vars = [:]
-    //template_vars['TEMPLATE_DOXYGEN_IMAGE'] = doxygegn_image
 
     def ref = [:]
 
     def comps = container.split('\\,').toList()
 
-    /*if (name != 'base') {
-        comps = comps.plus(0, 'base')
-    }*/
+    if (container == '') {
+        comps = comps.plus(0, 'jenkins')
+    }
 
     def templates = []
     String template
