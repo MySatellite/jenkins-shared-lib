@@ -10,6 +10,7 @@ def call(Map opts = [:]) {
     String jnlpImage = opts.get('jnlpImage', '')
 
     Map template_vars = [:]
+    print(container)
 
     def ref = [:]
 
