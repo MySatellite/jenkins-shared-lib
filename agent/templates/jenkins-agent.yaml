@@ -1,0 +1,37 @@
+apiVersion: "v1"
+kind: "Pod"
+metadata:
+  annotations: {}
+  namespace: "jenkins"
+spec:
+  containers:
+  - name: "jnlp"
+    tty: true
+    volumeMounts:
+    - mountPath: "/home/jenkins/agent/gocache"
+      name: "volume-0"
+      readOnly: false
+    - mountPath: "/home/jenkins/agent"
+      name: "workspace-volume"
+      readOnly: false
+    workingDir: "/home/jenkins/agent"
+  hostNetwork: false
+  nodeSelector:
+    kops.k8s.io/instancegroup: "jenkins"
+  restartPolicy: "Never"
+  tolerations:
+    - key: jenkins
+      operator: Equal
+      value: 'true'
+      effect: NoSchedule
+  volumes:
+  - hostPath:
+      path: "/home/ubuntu/gocache"
+    name: "volume-0"
+  - name: "private-git"
+    secret:
+      defaultMode: 384
+      secretName: "jenkins-git"
+  - emptyDir:
+      medium: ""
+    name: "workspace-volume"

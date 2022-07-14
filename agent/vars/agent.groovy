@@ -30,8 +30,8 @@ def call(Map opts = [:]) {
     def templates = []
     String template
     for (c in comps) {
-        template = libraryResource ' podtemplates/' + c + '.yaml'
-        template = renderTemplate(template, template_vars)
+        template = libraryResource ' agent/templates/' + c + '.yaml'
+        template = render(template, template_vars)
         templates.add(template)
     }
 

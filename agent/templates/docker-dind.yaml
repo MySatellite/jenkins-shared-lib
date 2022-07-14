@@ -1,0 +1,60 @@
+apiVersion: "v1"
+kind: "Pod"
+metadata:
+  annotations: {}
+  namespace: "jenkins"
+spec:
+  containers:
+  - name: "dind"
+    image: "docker:dind"
+    securityContext:
+      privileged: true
+    volumeMounts:
+    - name: "dind-storage"
+      mountPath: "/var/lib/docker"
+    env:
+    - name: "DOCKER_TLS_CERTDIR"
+      value: ''
+  - command:
+    - "cat"
+    image: "docker"
+    imagePullPolicy: "IfNotPresent"
+    name: "docker"
+    env:
+    - name: "POD_IP"
+      valueFrom:
+        fieldRef:
+          fieldPath: "status.podIP"
+    - name: "DOCKER_HOST"
+      value: "tcp://localhost:2375"
+    resources:
+      limits: {}
+      requests: {}
+    tty: true
+    volumeMounts:
+    - mountPath: "/home/jenkins/agent/gocache"
+      name: "volume-0"
+      readOnly: false
+    - mountPath: "/home/jenkins/agent"
+      name: "workspace-volume"
+      readOnly: false
+    workingDir: "/home/jenkins/agent"
+  hostNetwork: false
+  nodeSelector:
+    kops.k8s.io/instancegroup: "jenkins"
+  restartPolicy: "Never"
+  tolerations:
+    - key: jenkins
+      operator: Equal
+      value: 'true'
+      effect: NoSchedule
+  volumes:
+  - hostPath:
+      path: "/home/ubuntu/gocache"
+    name: "volume-0"
+  - name: "dind-storage"
+    emptyDir:
+      medium: ""
+  - emptyDir:
+      medium: ""
+    name: "workspace-volume"
