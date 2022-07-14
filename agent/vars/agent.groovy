@@ -30,7 +30,7 @@ def call(Map opts = [:]) {
     def templates = []
     String template
     for (c in comps) {
-        template = libraryResource 'templates/' + c + '.yaml'
+        template = libraryResource 'agent/templates/' + c + '.yaml'
         template = render(template, template_vars)
         templates.add(template)
     }
