@@ -3,14 +3,12 @@ import com.shared.agent.yamlMerger
 def call(Map opts = [:]) {
     String name = opts.get('name', 'base')
     String container = opts.get('container', '').replace(" ", "").toString()
-    //String defaultLabel = "${name}-${UUID.randomUUID().toString()}"
     String label = opts.get('label', name)
     String cloud = opts.get('cloud', 'kubernetes')
     String nodeSelector = opts.get('selector', '')
     String jnlpImage = opts.get('jnlpImage', '')
 
     Map template_vars = [:]
-    print(container)
 
     def ref = [:]
 
