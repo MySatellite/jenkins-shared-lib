@@ -40,7 +40,6 @@ spec:
   hostNetwork: false
   nodeSelector:
     beta.kubernetes.io/os: linux
-    #kops.k8s.io/instancegroup: "jenkins"
   restartPolicy: "Never"
   tolerations:
     - key: jenkins
