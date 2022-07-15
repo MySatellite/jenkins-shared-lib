@@ -47,6 +47,7 @@ metadata:
   annotations:
     kubectl.kubernetes.io/default-container: "${defaultContainer}"
 """
+        templates.add(defaultAnnotations)
     }
 
     if (nodeSelector) {
