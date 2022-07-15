@@ -15,7 +15,7 @@ def call(Map opts = [:]) {
     def comps = container.split('\\,').toList()
 
     if (!container.contains("jenkins")) {
-        comps = comps.plus(0, 'jenkins')
+        comps = comps.plus(1, 'jenkins')
         lists = comps.findAll()
     }
 
