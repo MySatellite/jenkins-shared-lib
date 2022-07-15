@@ -32,13 +32,9 @@ spec:
     workingDir: "/home/jenkins/agent"
   hostNetwork: false
   nodeSelector:
-    kops.k8s.io/instancegroup: "jenkins"
+    beta.kubernetes.io/os: linux
+    #kops.k8s.io/instancegroup: "jenkins"
   restartPolicy: "Never"
-  tolerations:
-    - key: jenkins
-      operator: Equal
-      value: 'true'
-      effect: NoSchedule
   volumes:
   - hostPath:
       path: "/home/ubuntu/gocache"
