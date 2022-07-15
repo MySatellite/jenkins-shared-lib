@@ -41,6 +41,14 @@ def call(Map opts = [:]) {
         templates.add(template)
     }
 
+    if (defaultContainer) {
+	def defaultAnnotations = """
+metadata:
+  annotations:
+    kubectl.kubernetes.io/default-container: "${defaultContainer}"
+"""
+    }
+
     if (nodeSelector) {
 	def selector = """
 spec:
