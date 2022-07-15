@@ -5,7 +5,22 @@ metadata:
   namespace: "jenkins"
 spec:
   containers:
-  - name: "jnlp"
+  - name: "aws-cli"
+    command:
+    - "cat"
+    image: "amazon/aws-cli:2.0.6"
+    imagePullPolicy: "IfNotPresent"
+    env:
+    - name: "AWS_ACCESS_KEY_ID"
+      valueFrom:
+        secretKeyRef:
+          name: jenkins-secret
+          key: AWS_ACCESS_KEY_ID
+    - name: "AWS_SECRET_ACCESS_KEY"
+      valueFrom:
+        secretKeyRef:
+          name: jenkins-secret
+          key: AWS_SECRET_ACCESS_KEY
     tty: true
     volumeMounts:
     - mountPath: "/home/jenkins/agent/gocache"

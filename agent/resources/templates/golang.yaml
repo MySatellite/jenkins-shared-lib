@@ -39,7 +39,7 @@ spec:
     workingDir: "/home/jenkins/agent"
   hostNetwork: false
   nodeSelector:
-    beta.kubernetes.io/os: linux
+    kops.k8s.io/instancegroup: "jenkins"
   restartPolicy: "Never"
   tolerations:
     - key: jenkins
@@ -50,6 +50,9 @@ spec:
   - hostPath:
       path: "/home/ubuntu/gocache"
     name: "volume-0"
+  - name: "dind-storage"
+    emptyDir:
+      medium: ""
   - name: "private-git"
     secret:
       defaultMode: 384
