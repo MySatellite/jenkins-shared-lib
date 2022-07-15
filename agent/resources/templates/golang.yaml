@@ -53,7 +53,7 @@ spec:
   - name: "private-git"
     secret:
       defaultMode: 384
-      secretName: "jenkins-git"
+      secretName: "jenkins-secret"
   - emptyDir:
       medium: ""
     name: "workspace-volume"
