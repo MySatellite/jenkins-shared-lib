@@ -3,6 +3,7 @@ import com.shared.agent.yamlMerger
 def call(Map opts = [:]) {
     String name = opts.get('name', 'base')
     String container = opts.get('container', '').replace(" ", "").toString()
+    String defaultContainer = opts.get('defaultContainer', '')
     String label = opts.get('label', name)
     String cloud = opts.get('cloud', 'kubernetes')
     String nodeSelector = opts.get('selector', '')
@@ -17,6 +18,19 @@ def call(Map opts = [:]) {
     if (!container.contains("jenkins")) {
         comps = comps.plus(1, 'jenkins')
         lists = comps.findAll()
+    }
+
+    if (defaultContainer == "") {
+        defaultContainer = "golang"
+    }
+
+    if (defaultContainer != lists[0]) {
+        if (!lists.contains(defaultContainer)) {
+            lists.add(defaultContainer)
+        }
+
+        index = lists.findIndexOf{ it == defaultContainer}
+        lists[0, index]  = lists[index, 0]
     }
 
     def templates = []
