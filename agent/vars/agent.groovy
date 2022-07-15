@@ -33,6 +33,8 @@ def call(Map opts = [:]) {
         lists[0, index]  = lists[index, 0]
     }
 
+    println(lists)
+
     def templates = []
     String template
     for (i in lists) {
@@ -41,14 +43,14 @@ def call(Map opts = [:]) {
         templates.add(template)
     }
 
-    if (defaultContainer) {
+    /*if (defaultContainer) {
 	def defaultAnnotations = """
 metadata:
   annotations:
     kubectl.kubernetes.io/default-container: "${defaultContainer}"
 """
         templates.add(defaultAnnotations)
-    }
+    }*/
 
     if (nodeSelector) {
 	def selector = """
@@ -68,6 +70,8 @@ spec:
 """
         templates.add(baseImage)
     }
+
+    println(templates)
 
     def yamlFile = new yamlMerger()
     def final_template = yamlFile.merge(templates)
